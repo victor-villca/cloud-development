@@ -5,54 +5,126 @@ import {
     createUserWithEmailAndPassword,
     signInWithPopup,
 } from 'firebase/auth';
+import '../styles.css';
 
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
-    const loginWithEmail = () => {
-        signInWithEmailAndPassword(auth, email, password).catch((err) =>
-            alert(err.message)
-        );
+    const loginWithEmail = async () => {
+        setIsLoading(true);
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+        } catch (err) {
+            alert(err.message);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
-    const registerWithEmail = () => {
-        createUserWithEmailAndPassword(auth, email, password).catch((err) =>
-            alert(err.message)
-        );
+    const registerWithEmail = async () => {
+        setIsLoading(true);
+        try {
+            await createUserWithEmailAndPassword(auth, email, password);
+        } catch (err) {
+            alert(err.message);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
-    const loginWithGoogle = () => {
-        signInWithPopup(auth, googleProvider).catch((err) =>
-            alert(err.message)
-        );
+    const loginWithGoogle = async () => {
+        setIsLoading(true);
+        try {
+            await signInWithPopup(auth, googleProvider);
+        } catch (err) {
+            alert(err.message);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
-    const loginWithFacebook = () => {
-        signInWithPopup(auth, facebookProvider).catch((err) =>
-            alert(err.message)
-        );
+    const loginWithFacebook = async () => {
+        setIsLoading(true);
+        try {
+            await signInWithPopup(auth, facebookProvider);
+        } catch (err) {
+            alert(err.message);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
-        <div className="container">
-            <h2>Login</h2>
-            <input
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-                placeholder="Password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            <button onClick={loginWithEmail}>Login</button>
-            <button onClick={registerWithEmail}>Register</button>
-            <hr />
-            <button onClick={loginWithGoogle}>Sign in with Google</button>
-            <button onClick={loginWithFacebook}>Sign in with Facebook</button>
+        <div className="login-container">
+            <h2 className="login-title">Iniciar Sesión</h2>
+
+            <div className="form-group">
+                <input
+                    className="login-input"
+                    type="email"
+                    placeholder="Correo electrónico"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    disabled={isLoading}
+                />
+            </div>
+
+            <div className="form-group">
+                <input
+                    className="login-input"
+                    type="password"
+                    placeholder="Contraseña"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    disabled={isLoading}
+                />
+            </div>
+
+            <div className="form-group">
+                <button
+                    className="btn btn-primary"
+                    onClick={loginWithEmail}
+                    disabled={isLoading}
+                    style={{ width: '100%', marginBottom: '10px' }}
+                >
+                    {isLoading ? 'Cargando...' : 'Iniciar Sesión'}
+                </button>
+
+                <button
+                    className="btn btn-secondary"
+                    onClick={registerWithEmail}
+                    disabled={isLoading}
+                    style={{ width: '100%' }}
+                >
+                    {isLoading ? 'Cargando...' : 'Registrarse'}
+                </button>
+            </div>
+
+            <div className="login-divider">
+                <span>O continúa con</span>
+            </div>
+
+            <div className="form-group">
+                <button
+                    className="btn btn-google"
+                    onClick={loginWithGoogle}
+                    disabled={isLoading}
+                    style={{ width: '100%', marginBottom: '10px' }}
+                >
+                    {isLoading ? 'Cargando...' : 'Iniciar con Google'}
+                </button>
+
+                <button
+                    className="btn btn-facebook"
+                    onClick={loginWithFacebook}
+                    disabled={isLoading}
+                    style={{ width: '100%' }}
+                >
+                    {isLoading ? 'Cargando...' : 'Iniciar con Facebook'}
+                </button>
+            </div>
         </div>
     );
 }

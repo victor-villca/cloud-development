@@ -2,42 +2,36 @@ import React from 'react';
 import { auth } from '../firebase';
 import { signOut } from 'firebase/auth';
 import { Link } from 'react-router-dom';
+import '../styles.css';
 
 export default function Navbar({ user }) {
-    const handleLogout = () => {
-        signOut(auth);
+    const handleLogout = async () => {
+        try {
+            await signOut(auth);
+        } catch (err) {
+            console.error('Error logging out:', err);
+        }
     };
 
     return (
-        <nav
-            style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: '10px 20px',
-                backgroundColor: '#007bff',
-                color: 'white',
-            }}
-        >
-            <div>
-                <strong>EmoScan</strong>
+        <nav className="navbar-emoscan">
+            <div className="navbar-brand">
+                <Link to="/" className="brand-link">
+                    <strong>EmoScan</strong>
+                </Link>
             </div>
-            <Link to="/settings" style={{ color: 'white', marginRight: 10 }}>
-                Settings
-            </Link>
-            <div>
-                {user.displayName || user.email}
-                <button
-                    onClick={handleLogout}
-                    style={{
-                        marginLeft: 10,
-                        backgroundColor: 'white',
-                        color: '#007bff',
-                        padding: '5px 10px',
-                        border: 'none',
-                        borderRadius: '5px',
-                    }}
-                >
+
+            <div className="navbar-center">
+                <Link to="/settings" className="navbar-settings-link">
+                    Settings
+                </Link>
+            </div>
+
+            <div className="navbar-user">
+                <span className="user-name">
+                    {user?.displayName || user?.email}
+                </span>
+                <button onClick={handleLogout} className="logout-btn">
                     Logout
                 </button>
             </div>
