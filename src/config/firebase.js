@@ -8,14 +8,15 @@ import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 
 const firebaseConfig = {
-    apiKey: 'AIzaSyAvTiOpc3ktUzOeTm1WrsnzqwurPut7_y4',
-    authDomain: 'victor-cloud-98a6e.firebaseapp.com',
-    projectId: 'victor-cloud-98a6e',
-    storageBucket: 'victor-cloud-98a6e.firebasestorage.app',
-    messagingSenderId: '778250440908',
-    appId: '1:778250440908:web:40007d31d6439dfeddf269',
-    measurementId: 'G-J0Z2JNLPER',
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_FIREBASE_APP_ID,
+    measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
+
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);

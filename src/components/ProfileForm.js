@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getUserProfile, saveUserProfile } from '../userService';
+import { getUserProfile, saveUserProfile } from '../services/userService';
 
 export default function ProfileForm({ user }) {
     const [address, setAddress] = useState('');

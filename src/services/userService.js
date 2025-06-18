@@ -1,5 +1,5 @@
 import { doc, getDoc, setDoc } from 'firebase/firestore';
-import { db } from './firebase';
+import { db } from '../config/firebase';
 
 export async function getUserProfile(uid) {
     if (!uid) return null;

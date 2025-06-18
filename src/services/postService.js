@@ -12,12 +12,13 @@ import {
 
 const db = getFirestore();
 
-export const createPost = async (userId, title, subject, content) => {
+export const createPost = async (userId, title, subject, content, imageUrl) => {
     return await addDoc(collection(db, 'posts'), {
         userId,
         title,
         subject,
         content,
+        imageUrl,
         createdAt: serverTimestamp(),
     });
 };

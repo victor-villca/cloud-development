@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { auth, googleProvider, facebookProvider } from '../firebase';
+import { auth, googleProvider, facebookProvider } from '../config/firebase';
 import {
     linkWithPopup,
     EmailAuthProvider,
