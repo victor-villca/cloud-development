@@ -12,6 +12,7 @@ import Login from './pages/Login';
 import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import Settings from './pages/Settings';
+import Notifications from './components/Notifications';
 
 function App() {
     const [user, setUser] = useState(null);
@@ -31,6 +32,7 @@ function App() {
     return (
         <Router>
             {user && <Navbar user={user} />}
+            {user && <Notifications currentUserId={user.uid} />}
             <Routes>
                 <Route
                     path="/login"

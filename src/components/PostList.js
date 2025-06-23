@@ -5,7 +5,9 @@ function PostList({ posts, onDelete }) {
         return (
             <div className="profile-form">
                 <h3>Lista de Publicaciones</h3>
-                <p>No tienes publicaciones aún. ¡Crea tu primera publicación!</p>
+                <p>
+                    No tienes publicaciones aún. ¡Crea tu primera publicación!
+                </p>
             </div>
         );
     }
@@ -16,13 +18,19 @@ function PostList({ posts, onDelete }) {
             {posts.map((post) => (
                 <div key={post.id} className="provider-section">
                     <h4>{post.title}</h4>
-                    <p><strong>Tema:</strong> {post.subject}</p>
+                    <p>
+                        <strong>Tema:</strong> {post.subject}
+                    </p>
                     <p>{post.content}</p>
                     {post.imageUrl && (
                         <img
                             src={post.imageUrl}
                             alt="Publicación"
-                            style={{ maxWidth: '100%', borderRadius: '8px', marginTop: '10px' }}
+                            style={{
+                                maxWidth: '100%',
+                                borderRadius: '8px',
+                                marginTop: '10px',
+                            }}
                         />
                     )}
                     <button

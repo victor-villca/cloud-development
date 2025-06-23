@@ -53,14 +53,25 @@ function Home() {
             if (image) {
                 imageUrl = await uploadImageToCloudinary(image);
             }
-
-            await createPost(user.uid, formData.title, formData.subject, formData.content, imageUrl);
+            const userName = user.displayName || user.email || 'Anonymous User';
+            await createPost(
+                user.uid,
+                formData.title,
+                formData.subject,
+                formData.content,
+                imageUrl,
+                userName
+            );
             await fetchPosts();
             setFormData({ title: '', subject: '', content: '' });
             setImage(null);
             setShowModal(false);
+            console.log(
+                'Post created successfully! Notification sent to all users.'
+            );
         } catch (err) {
             console.error('Error al crear publicación:', err);
+            alert('Error creating post: ' + err.message);
         }
     };
 
@@ -84,7 +95,10 @@ function Home() {
             <div className="settings-content">
                 <div className="settings-header">
                     <h2>Mis Publicaciones</h2>
-                    <button onClick={() => setShowModal(true)} className="btn btn-primary">
+                    <button
+                        onClick={() => setShowModal(true)}
+                        className="btn btn-primary"
+                    >
                         Agregar Nueva Publicación
                     </button>
                 </div>

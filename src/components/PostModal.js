@@ -1,12 +1,12 @@
 import React from 'react';
 
-function PostModal({ 
-    showModal, 
-    formData, 
-    onClose, 
-    onSubmit, 
-    onChange, 
-    onImageChange 
+function PostModal({
+    showModal,
+    formData,
+    onClose,
+    onSubmit,
+    onChange,
+    onImageChange,
 }) {
     if (!showModal) return null;
 
@@ -16,7 +16,9 @@ function PostModal({
             <div className="dialog-popup">
                 <div className="dialog-header">
                     <h3>Nueva Publicación</h3>
-                    <button onClick={onClose} className="dialog-close">✕</button>
+                    <button onClick={onClose} className="dialog-close">
+                        ✕
+                    </button>
                 </div>
 
                 <div className="dialog-body">
@@ -69,8 +71,16 @@ function PostModal({
                             />
                         </div>
                         <div className="dialog-actions">
-                            <button type="button" onClick={onClose} className="btn btn-cancel">Cancelar</button>
-                            <button type="submit" className="btn btn-primary">Crear Publicación</button>
+                            <button
+                                type="button"
+                                onClick={onClose}
+                                className="btn btn-cancel"
+                            >
+                                Cancelar
+                            </button>
+                            <button type="submit" className="btn btn-primary">
+                                Crear Publicación
+                            </button>
                         </div>
                     </form>
                 </div>
