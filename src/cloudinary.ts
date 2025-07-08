@@ -1,4 +1,6 @@
-export const CLOUDINARY_URL = `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`;
+export const CLOUDINARY_IMAGE_URL = `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`;
+export const CLOUDINARY_AUDIO_URL = `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/auto/upload`;
+
 export const CLOUDINARY_IMAGE_UPLOAD_PRESET =
   process.env.REACT_APP_CLOUDINARY_IMAGE_UPLOAD_PRESET;
 export const CLOUDINARY_AUDIO_UPLOAD_PRESET =

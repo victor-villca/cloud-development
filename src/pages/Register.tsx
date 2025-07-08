@@ -6,12 +6,15 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const [role, setRole] = useState<"admin" | "artista">("artista");
+  const [role, setRole] = useState<"admin" | "artista" | "regular">("regular");
+  const [image, setimage] = useState<File | null>(null);
   const navigate = useNavigate();
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    await registerUser(email, password, name, role);
+    if (image) {
+      await registerUser(email, password, name, role, image);
+    }
     navigate("/");
   };
 
@@ -41,11 +44,21 @@ const Register = () => {
         />
         <select
           value={role}
-          onChange={(e) => setRole(e.target.value as "admin" | "artista")}
+          onChange={(e) =>
+            setRole(e.target.value as "admin" | "artista" | "regular")
+          }
         >
           <option value="artista">Artista</option>
           <option value="admin">Administrador</option>
+          <option value="regular">Regular</option>
         </select>
+
+        <input
+          type="file"
+          accept="image/*"
+          onChange={(e) => setimage(e.target.files?.[0] || null)}
+          required
+        />
         <button type="submit">Crear cuenta</button>
       </form>
       <p>

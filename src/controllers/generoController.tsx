@@ -1,16 +1,24 @@
 import { db } from "../firebase";
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import { collection, getDocs, addDoc } from "firebase/firestore";
 import { uploadImage } from "../services/imageUploadService";
+import { Genero } from "../models/Genero";
 
-export const createGenero = async (nombre: string, imagen: File) => {
-  const url = await uploadImage(imagen);
-  await addDoc(collection(db, "generos"), {
-    nombre,
-    imagen: url,
+export const getGeneros = async (): Promise<Genero[]> => {
+  const snapshot = await getDocs(collection(db, "generos"));
+  return snapshot.docs.map((doc) => {
+    const data = doc.data();
+    return {
+      id: doc.id,
+      nombre: data.nombre,
+      imagen: data.imagen,
+    };
   });
 };
 
-export const getGeneros = async () => {
-  const snapshot = await getDocs(collection(db, "generos"));
-  return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+export const createGenero = async (nombre: string, imagen: File) => {
+  const imageUrl = await uploadImage(imagen);
+  await addDoc(collection(db, "generos"), {
+    nombre,
+    imagen: imageUrl,
+  });
 };
